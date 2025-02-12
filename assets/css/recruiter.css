@@ -1,0 +1,179 @@
+body {
+  font-family: 'Roboto', sans-serif;
+  background-color: #090033;
+  margin: 0;
+  padding: 0;
+}
+
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem;
+  background-color: #f4f6f9;
+  color: #2c3e50;
+}
+
+header h1 {
+  margin: 0;
+}
+
+button {
+  padding: 0.5rem 1rem;
+  background-color: #3498db;
+  margin: 0 1.5rem;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+button:hover {
+  background-color: #2980b9;
+}
+
+#searchBar {
+  width: 80%;
+  padding: 1rem;
+  margin: 1.5rem;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  box-sizing: border-box;
+}
+
+.job-card {
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  padding: 1.5rem;
+  margin: 1.5rem;
+  transition: transform 0.2s ease-in-out;
+}
+
+.job-card:hover {
+  transform: translateY(-5px);
+}
+
+.job-card h2 {
+  margin-top: 0;
+  font-size: 1.5rem;
+  color: #2c3e50;
+}
+
+.job-card p {
+  margin: 0.5rem 0;
+}
+
+.job-actions {
+  margin-top: 1rem;
+}
+
+.job-actions button {
+  margin-right: 0.5rem;
+}
+
+.edit-form {
+  padding: 1rem;
+  background: #aae0ff;
+  border-radius: 5px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.edit-form label {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-weight: bold;
+}
+
+.edit-form input,
+.edit-form textarea {
+  width: 98%;
+  padding: 0.5rem;
+  margin-bottom: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.edit-actions {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.edit-actions button {
+  margin-left: 0.5rem;
+}
+
+
+/* Modal background */
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 1000;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0, 0, 0, 0.8);
+}
+
+/* Modal content */
+.modal-content {
+  background-color: #b3b8ff;
+  margin: 10% auto;
+  padding: 20px;
+  border-radius: 8px;
+  width: 50%;
+  color: black;
+}
+
+.modal-content h2 {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.modal-content label {
+  display: block;
+  margin-bottom: 10px;
+}
+
+.modal-content input,
+.modal-content textarea {
+  width: 97%;
+  padding: 10px;
+  margin-bottom: 10px;
+  border: 1px solid #555;
+  border-radius: 4px;
+  background-color: #444;
+  color: white;
+}
+
+.modal-content button {
+  display: block;
+  width: 20%;
+  padding: 10px;
+  margin: 0 auto;
+  border: none;
+  border-radius: 4px;
+  background-color: #1a73bc;
+  color: rgb(0, 0, 0);
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.modal-content button:hover {
+  background-color: #002488;
+}
+
+/* Close button */
+.close {
+  color: black;
+  float: right;
+  font-size: 24px;
+  cursor: pointer;
+}
+
+.close:hover {
+  color: red;
+}
