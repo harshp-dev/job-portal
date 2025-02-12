@@ -1,0 +1,62 @@
+[
+  {
+    "id": 1,
+    "title": "Frontend Developer",
+    "company": "Tech Corp",
+    "category": "ReactJS",
+    "department": "Software Development",
+    "level": "Mid-Level",
+    "location": "Remote",
+    "description": "We are looking for a skilled ReactJS developer to build modern web applications.",
+    "postedDate": "2025-02-10",
+    "applied": false
+  },
+  {
+    "id": 2,
+    "title": "Backend Engineer",
+    "company": "Innovatech Solutions",
+    "category": "Node.js",
+    "department": "Software Development",
+    "level": "Senior",
+    "location": "New York, USA",
+    "description": "Looking for an experienced Node.js developer to design and maintain backend services.",
+    "postedDate": "2025-02-08",
+    "applied": false
+  },
+  {
+    "id": 3,
+    "title": "Marketing Analyst",
+    "company": "GrowthHub",
+    "category": "Marketing",
+    "department": "Marketing",
+    "level": "Entry-Level",
+    "location": "San Francisco, USA",
+    "description": "Analyze market trends and create reports to support business decisions.",
+    "postedDate": "2025-02-07",
+    "applied": false
+  },
+  {
+    "id": 4,
+    "title": "Data Scientist",
+    "company": "AI Insights",
+    "category": "Python, Machine Learning",
+    "department": "Data Science",
+    "level": "Mid-Level",
+    "location": "Remote",
+    "description": "Seeking a data scientist with expertise in ML models and data analysis.",
+    "postedDate": "2025-02-06",
+    "applied": false
+  },
+  {
+    "id": 5,
+    "title": "HR Manager",
+    "company": "PeopleFirst",
+    "category": "Human Resources",
+    "department": "HR",
+    "level": "Senior",
+    "location": "Chicago, USA",
+    "description": "We need an experienced HR professional to manage recruitment and employee engagement.",
+    "postedDate": "2025-02-05",
+    "applied": false
+  }
+]
