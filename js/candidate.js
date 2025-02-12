@@ -77,22 +77,29 @@ function searchJobs() {
     .catch((error) => console.error("Error searching jobs:", error));
 }
 
-// Open the Apply Modal when clicking the "Apply" button
 function openApplyModal(event) {
   const jobId = event.target.getAttribute("data-job-id");
   localStorage.setItem("applyingJobId", jobId); // Store job ID for reference
 
   // Show Modal
   document.getElementById("apply-modal").style.display = "flex";
-
-  // Close Modal on Click
-  document.querySelector(".close").addEventListener("click", () => {
-    document.getElementById("apply-modal").style.display = "none";
-  });
-
-  // Handle Form Submission
-  document.getElementById("apply-form").addEventListener("submit", applyForJob);
 }
+
+// Close Modal Functionality
+document.querySelector(".close").addEventListener("click", () => {
+  document.getElementById("apply-modal").style.display = "none";
+});
+
+// Close Modal When Clicking Outside
+window.addEventListener("click", function (event) {
+  const modal = document.getElementById("apply-modal");
+  if (event.target === modal) {
+    modal.style.display = "none";
+  }
+});
+
+// Handle Form Submission
+document.getElementById("apply-form").addEventListener("submit", applyForJob);
 
 function applyForJob(event) {
   event.preventDefault();
@@ -126,9 +133,10 @@ function applyForJob(event) {
   alert("Application submitted successfully!");
 
   // Close Modal
-    document.getElementById("apply-modal").style.display = "none";
+  document.getElementById("apply-modal").style.display = "none";
 }
 
+// Logout Functionality
 document.getElementById("logout-btn").addEventListener("click", function () {
   localStorage.removeItem("loggedInUser");
   window.location.href = "index.html";
