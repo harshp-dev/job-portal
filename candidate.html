@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Candidate Dashboard</title>
+    <!-- <link rel="stylesheet" href="assets/css/style.css" /> -->
+    <link rel="stylesheet" href="assets/css/candidate.css" />
+  </head>
+  <body>
+    <header>
+      <h1>Job Listings</h1>
+      <button id="logout-btn">Logout</button>
+    </header>
+
+    <!-- Search Bar -->
+    <div class="search-container">
+      <input
+        type="text"
+        id="search-input"
+        placeholder="Search by technology, department, level, title, or location..."
+      />
+      <button id="search-btn">Search</button>
+    </div>
+
+    <!-- job listing -->
+    <div id="job-listings">
+      <!-- job will rendereed over here from jobs.json-->
+    </div>
+
+    <!-- Apply form -->
+    <div id="apply-modal" class="modal">
+      <div class="modal-content">
+        <span class="close">&times;</span>
+        <h2>Apply for Job</h2>
+        <form id="apply-form">
+          <label for="name">Name: </label>
+          <input
+            type="text"
+            id="applicant-name"
+            placeholder="Your Name"
+            required
+          />
+          <label for="email">Email</label>
+          <input
+            type="email"
+            id="applicant-email"
+            placeholder="Your Email"
+            required
+          />
+          <label for="cv">Upload CV</label>
+          <input type="file" id="applicant-cv" accept=".pdf" required />
+          <p class="file-info">Only PDF files allowed</p>
+          <button type="submit">Submit Application</button>
+        </form>
+      </div>
+    </div>
+
+    <script src="js/candidate.js"></script>
+  </body>
+</html>
