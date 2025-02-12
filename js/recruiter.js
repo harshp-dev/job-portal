@@ -6,8 +6,9 @@ document.addEventListener("DOMContentLoaded", () => {
   const createJobForm = document.getElementById("createJobForm");
   const closeBtn = document.querySelector(".close");
 
+  const userRole = localStorage.getItem("userRole");
+  
   let jobs = [];
-
   // Fetch jobs from jobs.json
   async function fetchJobs() {
     try {

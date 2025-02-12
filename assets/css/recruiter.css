@@ -1,5 +1,5 @@
 body {
-  font-family: 'Roboto', sans-serif;
+  font-family: "Roboto", sans-serif;
   background-color: #090033;
   margin: 0;
   padding: 0;
@@ -41,7 +41,6 @@ button:hover {
   border-radius: 5px;
   box-sizing: border-box;
 }
-
 .job-card {
   background: white;
   border-radius: 8px;
@@ -103,7 +102,6 @@ button:hover {
 .edit-actions button {
   margin-left: 0.5rem;
 }
-
 
 /* Modal background */
 .modal {
