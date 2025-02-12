@@ -42,7 +42,15 @@ button:hover {
   box-sizing: border-box;
 }
 
+#jobList{
+  display: flex;
+
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+}
+
 .job-card {
+  width: 25%;
   background: white;
   border-radius: 8px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
