@@ -1,1 +1,46 @@
-    
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Recruiter Dashboard</title>
+  <link rel="stylesheet" href="assets/css/recruiter.css">
+</head>
+<body>
+  <header>
+    <h1>Recruiter Dashboard</h1>
+    <button id="logoutBtn">Logout</button>
+  </header>
+
+  <main>
+    <section>
+      <input type="text" id="searchBar" placeholder="Search jobs by title, department, or category" />
+      <button id="createJobBtn">Create New Job</button>
+    </section>
+
+    <section id="jobList">
+      <!-- Job listings will be dynamically added here -->
+    </section>
+  </main>
+
+  <div id="createJobModal" class="modal">
+    <div class="modal-content">
+      <span class="close">&times;</span>
+      <h2>Create New Job</h2>
+      <form id="createJobForm">
+        <label>Title: <input type="text" id="jobTitle" required></label>
+        <label>Company: <input type="text" id="jobCompany" required></label>
+        <label>Category: <input type="text" id="jobCategory" required></label>
+        <label>Department: <input type="text" id="jobDepartment" required></label>
+        <label>Level: <input type="text" id="jobLevel" required></label>
+        <label>Location: <input type="text" id="jobLocation" required></label>
+        <label>Description: <textarea id="jobDescription" required></textarea></label>
+        <button type="submit">Add Job</button>
+      </form>
+    </div>
+  </div>  
+
+  <script src="js/auth.js"></script>
+  <script src="js/recruiter.js"></script>
+</body>
+</html>
