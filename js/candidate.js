@@ -1,60 +1,63 @@
 document.addEventListener("DOMContentLoaded", function () {
+  // Load job listings on page load
   fetchJobs();
+
+  // Search Functionality
   document.getElementById("search-btn").addEventListener("click", searchJobs);
+
+  // Close Modal on Click
+  document.querySelector(".close").addEventListener("click", () => {
+    document.getElementById("apply-modal").style.display = "none";
+  });
+
+  // Add logout functionality
+  document.getElementById("logout-btn").addEventListener("click", function () {
+    localStorage.removeItem("loggedInUser");
+    window.location.href = "index.html";
+  });
 });
 
+// Fetch jobs from `jobs.json`
 function fetchJobs() {
   fetch("../data/jobs.json")
     .then((response) => response.json())
     .then((jobs) => {
       displayJobs(jobs);
     })
-    .catch((error) => {
-      console.log("Error Occured", error);
-    });
+    .catch((error) => console.error("Error loading jobs:", error));
 }
 
 function displayJobs(jobs) {
   const jobContainer = document.getElementById("job-listings");
-  jobContainer.innerHTML = "";
+  jobContainer.innerHTML = ""; // Clear previous results
+
   jobs.forEach((job) => {
     const jobCard = document.createElement("div");
     jobCard.classList.add("job-card");
+
     jobCard.innerHTML = `
-            <h3>${job.title}</h3>
-            <p><strong>Company:</strong> ${job.company}</p>
-            <p><strong>Category:</strong> ${job.category}</p>
-            <p><strong>Department:</strong> ${job.department}</p>
-            <p><strong>Level:</strong> ${job.level}</p>
-            <p><strong>Location:</strong> ${job.location}</p>
-            <p><strong>Description:</strong> ${job.description}</p>
-            <button class="apply-btn" data-job-id="${job.id}" ${
+              <h3>${job.title}</h3>
+              <p><strong>Company:</strong> ${job.company}</p>
+              <p><strong>Category:</strong> ${job.category}</p>
+              <p><strong>Department:</strong> ${job.department}</p>
+              <p><strong>Level:</strong> ${job.level}</p>
+              <p><strong>Location:</strong> ${job.location}</p>
+              <p><strong>Description:</strong> ${job.description}</p>
+              <button class="apply-btn" data-job-id="${job.id}" ${
       job.applied ? "disabled" : ""
     }>
-                ${job.applied ? "Applied" : "Apply"}
-            </button>
-        `;
+                  ${job.applied ? "Applied" : "Apply"}
+              </button>
+          `;
 
     jobContainer.appendChild(jobCard);
   });
+
+  // Add event listeners to Apply buttons
   document.querySelectorAll(".apply-btn").forEach((button) => {
     button.addEventListener("click", openApplyModal);
   });
 }
-
-// Jobs Data Set
-// {
-//     "id": 2,
-//     "title": "Backend Engineer",
-//     "company": "Innovatech Solutions",
-//     "category": "Node.js",
-//     "department": "Software Development",
-//     "level": "Senior",
-//     "location": "New York, USA",
-//     "description": "Looking for an experienced Node.js developer to design and maintain backend services.",
-//     "postedDate": "2025-02-08",
-//     "applied": false
-//   },
 
 function searchJobs() {
   const searchQuery = document
@@ -68,9 +71,7 @@ function searchJobs() {
         (job) =>
           job.category.toLowerCase().includes(searchQuery) ||
           job.department.toLowerCase().includes(searchQuery) ||
-          job.level.toLowerCase().includes(searchQuery) ||
-          job.title.toLowerCase().includes(searchQuery) ||
-          job.location.toLowerCase().includes(searchQuery)
+          job.level.toLowerCase().includes(searchQuery)
       );
       displayJobs(filteredJobs);
     })
@@ -79,27 +80,19 @@ function searchJobs() {
 
 function openApplyModal(event) {
   const jobId = event.target.getAttribute("data-job-id");
-  localStorage.setItem("applyingJobId", jobId); // Store job ID for reference
+  localStorage.setItem("applyingJobId", jobId);
 
   // Show Modal
   document.getElementById("apply-modal").style.display = "flex";
+
+  // Remove any existing event listeners
+  const form = document.getElementById("apply-form");
+  const newForm = form.cloneNode(true);
+  form.parentNode.replaceChild(newForm, form);
+
+  // Add new event listener
+  newForm.addEventListener("submit", applyForJob);
 }
-
-// Close Modal Functionality
-document.querySelector(".close").addEventListener("click", () => {
-  document.getElementById("apply-modal").style.display = "none";
-});
-
-// Close Modal When Clicking Outside
-window.addEventListener("click", function (event) {
-  const modal = document.getElementById("apply-modal");
-  if (event.target === modal) {
-    modal.style.display = "none";
-  }
-});
-
-// Handle Form Submission
-document.getElementById("apply-form").addEventListener("submit", applyForJob);
 
 function applyForJob(event) {
   event.preventDefault();
@@ -135,9 +128,3 @@ function applyForJob(event) {
   // Close Modal
   document.getElementById("apply-modal").style.display = "none";
 }
-
-// Logout Functionality
-document.getElementById("logout-btn").addEventListener("click", function () {
-  localStorage.removeItem("loggedInUser");
-  window.location.href = "index.html";
-});
