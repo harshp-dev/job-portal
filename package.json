@@ -1,0 +1,15 @@
+{
+  "name": "job-portal",
+  "version": "1.0.0",
+  "description": "Job Portal for Candidates and Recruiter",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@github-work:harshp-dev/job-portal.git"
+  },
+  "author": "",
+  "license": "ISC"
+}
