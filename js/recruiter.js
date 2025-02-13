@@ -1,7 +1,7 @@
 document.addEventListener(
   "DOMContentLoaded",
   function checkUserAuthenticated() {
-    const userRole = localStorage.getItem("userRole");
+    const userRole = sessionStorage.getItem("userRole");
     if (userRole !== "recruiter") {
       alert("You are not allowed to access this page.");
       if (userRole === "candidate") {
@@ -201,16 +201,13 @@ document.addEventListener("DOMContentLoaded", () => {
     createJobModal.style.display = "none"; // Close the modal
     createJobForm.reset(); // Reset the form fields
   });
-
-  // Handle job actions (Edit, Delete, View Applicants)
+  // Use single event listener for all dynamically generated job buttons
   jobList.addEventListener("click", (e) => {
     const id = Number(e.target.getAttribute("data-id"));
     if (e.target.classList.contains("editBtn")) {
       editJob(id);
     } else if (e.target.classList.contains("deleteBtn")) {
       deleteJob(id);
-    } else if (e.target.classList.contains("viewApplicantsBtn")) {
-      viewApplicants(id);
     }
   });
 
@@ -249,7 +246,6 @@ document.addEventListener("DOMContentLoaded", () => {
       renderJobs(searchBar.value); // This will restore the original view without keeping it in edit mode.
     });
   }
-
   function saveJobEdit(id) {
     const editedJob = {
       id,
@@ -286,11 +282,60 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   }
 
-  // View applicants functionality
+  // View applications for each job card
   function viewApplicants(id) {
-    window.location.href = `viewApplications.html?jobId=${id}`;
+    const getApplications = localStorage.getItem("jobApplications");
+
+    if (!getApplications) {
+      alert("No applications found.");
+      return;
+    }
+
+    const applications = JSON.parse(getApplications);
+    const filteredApplications = applications.filter(
+      (app) => String(app.jobId) === String(id)
+    );
+
+    // Get modal elements
+    const modal = document.getElementById("applicants-modal");
+    const modalContent = document.getElementById("applicants-list");
+
+    // this thing will clear previous data
+    modalContent.innerHTML = "";
+
+    if (filteredApplications.length === 0) {
+      modalContent.innerHTML = "<p>No applicants for this job.</p>";
+    } else {
+      filteredApplications.forEach((app) => {
+        const applicantDiv = document.createElement("div");
+        applicantDiv.classList.add("applicant");
+
+        applicantDiv.innerHTML = `
+                <p><strong>Name:</strong> ${app.name}</p>
+                <p><strong>Email:</strong> ${app.email}</p>
+                <p><strong>CV:</strong> <a href="#" onclick="downloadCV('${app.cvName}')">${app.cvName}</a></p>
+                <hr>
+            `;
+        modalContent.appendChild(applicantDiv);
+      });
+    }
+
+    // Show Modal
+    modal.style.display = "flex";
   }
 
+  // Function to Close the Modal
+  document.querySelector("#applicants-modal").addEventListener("click", () => {
+    document.getElementById("applicants-modal").style.display = "none";
+  });
+
+  // Close Modal When Clicking Outside
+  window.addEventListener("click", (event) => {
+    const modal = document.getElementById("applicants-modal");
+    if (event.target === modal) {
+      modal.style.display = "none";
+    }
+  });
   // Logout button
   logoutBtn.addEventListener("click", () => {
     localStorage.removeItem("currentUser");

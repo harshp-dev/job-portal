@@ -28,7 +28,6 @@ function handleSignUp() {
     alert("Please fill all the fields.");
   }
 }
-
 function handleLogin() {
   const username = document.getElementById("username").value;
   const password = document.getElementById("password").value;
@@ -43,8 +42,9 @@ function handleLogin() {
   );
 
   if (user) {
-    localStorage.setItem("currentUser", JSON.stringify(user));
-    localStorage.setItem("userRole", role);
+    // using session instead of localstorage because to access the two tabs with different user side by side.
+    sessionStorage.setItem("currentUser", JSON.stringify(user));
+    sessionStorage.setItem("userRole", role);
     alert("Login successful!");
     if (role === "candidate") {
       window.location.href = "candidate.html";
