@@ -10,7 +10,7 @@ header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  color: Blue;
+  color: #007bff;
   padding: 20px 20px;
 }
 

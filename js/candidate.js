@@ -15,6 +15,15 @@ document.addEventListener("DOMContentLoaded", function () {
     localStorage.removeItem("loggedInUser");
     window.location.href = "index.html";
   });
+  const userRole = localStorage.getItem("userRole");
+  if (userRole !== "candidate") {
+    alert("You are not allowed to access this page");
+    if (userRole === "recruiter") {
+      window.location.href = "../recruiter.html";
+    } else {
+      window.location.href = "../index.html";
+    }
+  }
 });
 
 // Fetch jobs from `jobs.json`

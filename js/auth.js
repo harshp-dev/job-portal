@@ -44,6 +44,7 @@ function handleLogin() {
 
   if (user) {
     localStorage.setItem("currentUser", JSON.stringify(user));
+    localStorage.setItem("userRole", role);
     alert("Login successful!");
     if (role === "candidate") {
       window.location.href = "candidate.html";

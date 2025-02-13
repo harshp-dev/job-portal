@@ -1,3 +1,18 @@
+document.addEventListener(
+  "DOMContentLoaded",
+  function checkUserAuthenticated() {
+    const userRole = localStorage.getItem("userRole");
+    if (userRole !== "recruiter") {
+      alert("You are not allowed to access this page.");
+      if (userRole === "candidate") {
+        window.location.href = "../candidate.html";
+      } else {
+        window.location.href = "../index.html";
+      }
+    }
+  }
+);
+
 document.addEventListener("DOMContentLoaded", () => {
   const jobList = document.getElementById("jobList");
   const searchBar = document.getElementById("searchBar");
@@ -5,9 +20,8 @@ document.addEventListener("DOMContentLoaded", () => {
   const createJobModal = document.getElementById("createJobModal");
   const createJobForm = document.getElementById("createJobForm");
   const closeBtn = document.querySelector(".close");
+  // const userRole = localStorage.getItem("userRole");
 
-  const userRole = localStorage.getItem("userRole");
-  
   let jobs = [];
   // Fetch jobs from jobs.json
   async function fetchJobs() {
