@@ -1,3 +1,4 @@
+//1. Check Authentication
 document.addEventListener(
   "DOMContentLoaded",
   function checkUserAuthenticated() {
@@ -13,6 +14,7 @@ document.addEventListener(
   }
 );
 
+// 2. Element Initialization
 document.addEventListener("DOMContentLoaded", () => {
   const jobList = document.getElementById("jobList");
   const searchBar = document.getElementById("searchBar");
@@ -23,7 +25,8 @@ document.addEventListener("DOMContentLoaded", () => {
   // const userRole = localStorage.getItem("userRole");
 
   let jobs = [];
-  // Fetch jobs from jobs.json
+
+  // 3. Fetch jobs from jobs.json
   async function fetchJobs() {
     try {
       const response = await fetch("data/jobs.json");
@@ -35,7 +38,6 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   }
 
-  let editingJobId = null;
 
   // Search functionality with real-time filtering
   searchBar.addEventListener("input", () => {
@@ -66,6 +68,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     // Pagination logic
+    let editingJobId = null;
     const totalPages = Math.ceil(filteredJobs.length / itemsPerPage);
     const startIndex = (currentPage - 1) * itemsPerPage;
     const endIndex = startIndex + itemsPerPage;
@@ -87,14 +90,13 @@ document.addEventListener("DOMContentLoaded", () => {
           <label>Location: <input type="text" id="editLocation" value="${job.location}"></label>
           <label>Description: <textarea id="editDescription">${job.description}</textarea></label>
           <div class="edit-actions">
+            <button class="editBtn" data-id="${job.id}">Edit</button>
             <button class="saveBtn" data-id="${job.id}">Save</button>
             <button class="cancelBtn" data-id="${job.id}">Cancel</button>
           </div>
         </div>
       `;
-        jobCard
-          .querySelector(".saveBtn")
-          .addEventListener("click", () => saveJobEdit(job.id));
+        jobCard.querySelector(".saveBtn").addEventListener("click", () => saveJobEdit(job.id));
         jobCard.querySelector(".cancelBtn").addEventListener("click", () => {
           editingJobId = null;
           renderJobs(filter);
@@ -115,10 +117,6 @@ document.addEventListener("DOMContentLoaded", () => {
           <button class="viewApplicantsBtn" data-id="${job.id}">View Applicants</button>
         </div>
       `;
-        jobCard.querySelector(".editBtn").addEventListener("click", () => {
-          editingJobId = job.id;
-          renderJobs(filter);
-        });
         jobCard
           .querySelector(".deleteBtn")
           .addEventListener("click", () => deleteJob(job.id));
@@ -213,11 +211,25 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // Edit job functionality
   function editJob(id) {
-    const jobCard = document
-      .querySelector(`.editBtn[data-id="${id}"]`)
-      .closest(".job-card");
+    const editBtn = document.querySelector(`.editBtn[data-id="${id}"]`);
+    if (!editBtn) {
+      console.error(`Edit button not found for job with id: ${id}`);
+      return;
+    }
+
+    const jobCard = editBtn.closest(".job-card");
+    if (!jobCard) {
+      console.error(`Job card not found for job with id: ${id}`);
+      return;
+    }
+
     const job = jobs.find((job) => job.id === id);
-    if (!job) return alert("Job not found!");
+    if (!job) {
+      alert("Job not found!");
+      return;
+    }
+
+    console.log("Editing job:", job);
 
     // Replace job card content with an editable form
     jobCard.innerHTML = `
