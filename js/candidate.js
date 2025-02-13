@@ -4,9 +4,9 @@ document.addEventListener("DOMContentLoaded", function () {
   if (userRole !== "candidate") {
     alert("You are not allowed to access this page");
     if (userRole === "recruiter") {
-      window.location.href = "../recruiter.html";
+      window.location.href = "../pages/recruiter.html";
     } else {
-      window.location.href = "../index.html";
+      window.location.href = "/index.html";
     }
   }
 });
@@ -21,11 +21,10 @@ document.addEventListener("DOMContentLoaded", function () {
   document.querySelector(".close").addEventListener("click", () => {
     document.getElementById("apply-modal").style.display = "none";
   });
-
   // Add logout functionality
   document.getElementById("logout-btn").addEventListener("click", function () {
     localStorage.removeItem("loggedInUser");
-    window.location.href = "index.html";
+    window.location.href = "/index.html";
   });
 });
 
@@ -83,7 +82,9 @@ function searchJobs() {
         (job) =>
           job.category.toLowerCase().includes(searchQuery) ||
           job.department.toLowerCase().includes(searchQuery) ||
-          job.level.toLowerCase().includes(searchQuery)
+          job.level.toLowerCase().includes(searchQuery) ||
+          job.company.toLowerCase().includes(searchQuery) ||
+          job.location.toLowerCase().includes(searchQuery)
       );
       displayJobs(filteredJobs);
     })

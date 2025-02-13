@@ -6,9 +6,7 @@ document.addEventListener(
     if (userRole !== "recruiter") {
       alert("You are not allowed to access this page.");
       if (userRole === "candidate") {
-        window.location.href = "../candidate.html";
-      } else {
-        window.location.href = "../index.html";
+        window.location.href = "../pages/candidate.html";
       }
     }
   }
@@ -29,7 +27,7 @@ document.addEventListener("DOMContentLoaded", () => {
   // 3. Fetch jobs from jobs.json
   async function fetchJobs() {
     try {
-      const response = await fetch("data/jobs.json");
+      const response = await fetch("../data/jobs.json");
       if (!response.ok) throw new Error("Failed to fetch job data");
       jobs = await response.json();
       renderJobs();
@@ -37,7 +35,6 @@ document.addEventListener("DOMContentLoaded", () => {
       jobList.innerHTML = `<p class="error">Error loading job data. Please try again later.</p>`;
     }
   }
-
 
   // Search functionality with real-time filtering
   searchBar.addEventListener("input", () => {
@@ -96,7 +93,9 @@ document.addEventListener("DOMContentLoaded", () => {
           </div>
         </div>
       `;
-        jobCard.querySelector(".saveBtn").addEventListener("click", () => saveJobEdit(job.id));
+        jobCard
+          .querySelector(".saveBtn")
+          .addEventListener("click", () => saveJobEdit(job.id));
         jobCard.querySelector(".cancelBtn").addEventListener("click", () => {
           editingJobId = null;
           renderJobs(filter);
@@ -117,9 +116,9 @@ document.addEventListener("DOMContentLoaded", () => {
           <button class="viewApplicantsBtn" data-id="${job.id}">View Applicants</button>
         </div>
       `;
-        jobCard
-          .querySelector(".deleteBtn")
-          .addEventListener("click", () => deleteJob(job.id));
+        // jobCard
+        //   .querySelector(".deleteBtn")
+        //   .addEventListener("click", () => deleteJob(job.id));
         jobCard
           .querySelector(".viewApplicantsBtn")
           .addEventListener("click", () => viewApplicants(job.id));
@@ -351,7 +350,7 @@ document.addEventListener("DOMContentLoaded", () => {
   // Logout button
   logoutBtn.addEventListener("click", () => {
     localStorage.removeItem("currentUser");
-    window.location.href = "index.html";
+    window.location.href = "/index.html";
   });
 
   // Fetch jobs on page load

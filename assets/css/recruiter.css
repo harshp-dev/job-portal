@@ -42,7 +42,7 @@ button:hover {
   box-sizing: border-box;
 }
 
-#jobList{
+#jobList {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-evenly;
@@ -124,7 +124,7 @@ button:hover {
   background-color: rgba(0, 0, 0, 0.8);
 }
 
-#pagination{
+#pagination {
   margin: 0 1.5rem 1.5rem 1.5rem;
   display: flex;
   justify-content: space-between;
@@ -132,7 +132,7 @@ button:hover {
 
 /* Modal content */
 .modal-content {
-  background-color: #b3b8ff;
+  background-color: white;
   margin: 10% auto;
   padding: 20px;
   border-radius: 8px;

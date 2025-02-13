@@ -17,12 +17,12 @@ function handleSignUp() {
 
     if (userExists) {
       alert("User already exists. Please login.");
-      window.location.href = "index.html";
+      window.location.href = "/index.html";
     } else {
       users.push({ username, password, role });
       localStorage.setItem("users", JSON.stringify(users));
       alert("Sign Up successful! You can now log in.");
-      window.location.href = "index.html";
+      window.location.href = "/index.html";
     }
   } else {
     alert("Please fill all the fields.");
@@ -47,9 +47,9 @@ function handleLogin() {
     sessionStorage.setItem("userRole", role);
     alert("Login successful!");
     if (role === "candidate") {
-      window.location.href = "candidate.html";
+      window.location.href = "../pages/candidate.html";
     } else {
-      window.location.href = "recruiter.html";
+      window.location.href = "../pages/recruiter.html";
     }
   } else {
     alert("Invalid credentials or role. Please try again.");
