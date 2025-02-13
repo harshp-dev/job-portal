@@ -133,7 +133,8 @@ function applyForJob(event) {
 
   // Mark job as "Applied" in UI
   document.querySelector(`[data-job-id="${jobId}"]`).innerText = "Applied";
-  document.querySelector(`[data-job-id="${jobId}"]`).style.backgroundColor = "chocolate";
+  document.querySelector(`[data-job-id="${jobId}"]`).style.backgroundColor =
+    "chocolate";
   document.querySelector(`[data-job-id="${jobId}"]`).disabled = true;
 
   alert("Application submitted successfully!");

@@ -1,17 +1,14 @@
-document.addEventListener(
-  "DOMContentLoaded",
-  function checkUserAuthenticated() {
-    const userRole = sessionStorage.getItem("userRole");
-    if (userRole !== "recruiter") {
-      alert("You are not allowed to access this page.");
-      if (userRole === "candidate") {
-        window.location.href = "../candidate.html";
-      } else {
-        window.location.href = "../index.html";
-      }
+document.addEventListener("DOMContentLoaded", function () {
+  const userRole = sessionStorage.getItem("userRole");
+  if (userRole !== "recruiter") {
+    alert("You are not allowed to access this page.");
+    if (userRole === "candidate") {
+      window.location.href = "../candidate.html";
+    } else {
+      window.location.href = "../index.html";
     }
   }
-);
+});
 
 document.addEventListener("DOMContentLoaded", () => {
   const jobList = document.getElementById("jobList");
