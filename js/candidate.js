@@ -1,3 +1,15 @@
+// user route protection, if candidate will try to access the recruiter's page then it won't allow
+document.addEventListener("DOMContentLoaded", function () {
+  const userRole = sessionStorage.getItem("userRole");
+  if (userRole !== "candidate") {
+    alert("You are not allowed to access this page");
+    if (userRole === "recruiter") {
+      window.location.href = "../recruiter.html";
+    } else {
+      window.location.href = "../index.html";
+    }
+  }
+});
 document.addEventListener("DOMContentLoaded", function () {
   // Load job listings on page load
   fetchJobs();
@@ -15,15 +27,6 @@ document.addEventListener("DOMContentLoaded", function () {
     localStorage.removeItem("loggedInUser");
     window.location.href = "index.html";
   });
-  const userRole = localStorage.getItem("userRole");
-  if (userRole !== "candidate") {
-    alert("You are not allowed to access this page");
-    if (userRole === "recruiter") {
-      window.location.href = "../recruiter.html";
-    } else {
-      window.location.href = "../index.html";
-    }
-  }
 });
 
 // Fetch jobs from `jobs.json`
