@@ -100,11 +100,12 @@ function openApplyModal(event) {
 
   // Remove any existing event listeners
   const form = document.getElementById("apply-form");
-  const newForm = form.cloneNode(true);
-  form.parentNode.replaceChild(newForm, form);
 
-  // Add new event listener
-  newForm.addEventListener("submit", applyForJob);
+  // Remove existing event listener
+  form.removeEventListener("submit", applyForJob);
+
+  // Add event listener for form submission
+  form.addEventListener("submit", applyForJob);
 }
 
 function applyForJob(event) {
