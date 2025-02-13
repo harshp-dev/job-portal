@@ -43,6 +43,9 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
   // Render job listings
+  let currentPage = 1;
+  const itemsPerPage = 6; // Number of job cards per page
+
   function renderJobs(filter = "") {
     jobList.innerHTML = ""; // Clear current listings
 
@@ -50,7 +53,10 @@ document.addEventListener("DOMContentLoaded", () => {
       (job) =>
         job.title.toLowerCase().includes(filter.toLowerCase()) ||
         job.department.toLowerCase().includes(filter.toLowerCase()) ||
-        job.category.toLowerCase().includes(filter.toLowerCase())
+        job.category.toLowerCase().includes(filter.toLowerCase()) ||
+        job.company.toLowerCase().includes(filter.toLowerCase()) ||
+        job.level.toLowerCase().includes(filter.toLowerCase()) ||
+        job.location.toLowerCase().includes(filter.toLowerCase())
     );
 
     if (filteredJobs.length === 0) {
@@ -59,29 +65,33 @@ document.addEventListener("DOMContentLoaded", () => {
       return;
     }
 
-    filteredJobs.forEach((job) => {
-      const isEditing = job.id === editingJobId; // Check if this job is in edit mode
+    // Pagination logic
+    const totalPages = Math.ceil(filteredJobs.length / itemsPerPage);
+    const startIndex = (currentPage - 1) * itemsPerPage;
+    const endIndex = startIndex + itemsPerPage;
+    const jobsToShow = filteredJobs.slice(startIndex, endIndex);
+
+    jobsToShow.forEach((job) => {
+      const isEditing = job.id === editingJobId;
       const jobCard = document.createElement("div");
       jobCard.classList.add("job-card");
 
       if (isEditing) {
-        // Render editable form for the job
         jobCard.innerHTML = `
-          <div class="edit-form">
-            <label>Title: <input type="text" id="editTitle" value="${job.title}"></label>
-            <label>Company: <input type="text" id="editCompany" value="${job.company}"></label>
-            <label>Category: <input type="text" id="editCategory" value="${job.category}"></label>
-            <label>Department: <input type="text" id="editDepartment" value="${job.department}"></label>
-            <label>Level: <input type="text" id="editLevel" value="${job.level}"></label>
-            <label>Location: <input type="text" id="editLocation" value="${job.location}"></label>
-            <label>Description: <textarea id="editDescription">${job.description}</textarea></label>
-            <div class="edit-actions">
-              <button class="saveBtn" data-id="${job.id}">Save</button>
-              <button class="cancelBtn" data-id="${job.id}">Cancel</button>
-            </div>
+        <div class="edit-form">
+          <label>Title: <input type="text" id="editTitle" value="${job.title}"></label>
+          <label>Company: <input type="text" id="editCompany" value="${job.company}"></label>
+          <label>Category: <input type="text" id="editCategory" value="${job.category}"></label>
+          <label>Department: <input type="text" id="editDepartment" value="${job.department}"></label>
+          <label>Level: <input type="text" id="editLevel" value="${job.level}"></label>
+          <label>Location: <input type="text" id="editLocation" value="${job.location}"></label>
+          <label>Description: <textarea id="editDescription">${job.description}</textarea></label>
+          <div class="edit-actions">
+            <button class="saveBtn" data-id="${job.id}">Save</button>
+            <button class="cancelBtn" data-id="${job.id}">Cancel</button>
           </div>
-        `;
-
+        </div>
+      `;
         jobCard
           .querySelector(".saveBtn")
           .addEventListener("click", () => saveJobEdit(job.id));
@@ -90,28 +100,25 @@ document.addEventListener("DOMContentLoaded", () => {
           renderJobs(filter);
         });
       } else {
-        // Render standard job card
         jobCard.innerHTML = `
-          <h2>${job.title}</h2>
-          <p><strong>Company:</strong> ${job.company}</p>
-          <p><strong>Category:</strong> ${job.category}</p>
-          <p><strong>Department:</strong> ${job.department}</p>
-          <p><strong>Level:</strong> ${job.level}</p>
-          <p><strong>Location:</strong> ${job.location}</p>
-          <p><strong>Description:</strong> ${job.description}</p>
-          <p><strong>Posted On:</strong> ${job.postedDate}</p>
-          <div class="job-actions">
-            <button class="editBtn" data-id="${job.id}">Edit</button>
-            <button class="deleteBtn" data-id="${job.id}">Delete</button>
-            <button class="viewApplicantsBtn" data-id="${job.id}">View Applicants</button>
-          </div>
-        `;
-
+        <h2>${job.title}</h2>
+        <p><strong>Company:</strong> ${job.company}</p>
+        <p><strong>Category:</strong> ${job.category}</p>
+        <p><strong>Department:</strong> ${job.department}</p>
+        <p><strong>Level:</strong> ${job.level}</p>
+        <p><strong>Location:</strong> ${job.location}</p>
+        <p><strong>Description:</strong> ${job.description}</p>
+        <p><strong>Posted On:</strong> ${job.postedDate}</p>
+        <div class="job-actions">
+          <button class="editBtn" data-id="${job.id}">Edit</button>
+          <button class="deleteBtn" data-id="${job.id}">Delete</button>
+          <button class="viewApplicantsBtn" data-id="${job.id}">View Applicants</button>
+        </div>
+      `;
         jobCard.querySelector(".editBtn").addEventListener("click", () => {
           editingJobId = job.id;
           renderJobs(filter);
         });
-
         jobCard
           .querySelector(".deleteBtn")
           .addEventListener("click", () => deleteJob(job.id));
@@ -122,6 +129,35 @@ document.addEventListener("DOMContentLoaded", () => {
 
       jobList.appendChild(jobCard);
     });
+
+    renderPaginationButtons(totalPages);
+  }
+
+  // Function to render pagination buttons
+  function renderPaginationButtons(totalPages) {
+    const paginationContainer = document.getElementById("pagination");
+    paginationContainer.innerHTML = ""; // Clear existing buttons
+
+    if (totalPages > 1) {
+      const prevButton = document.createElement("button");
+      prevButton.textContent = "Previous";
+      prevButton.disabled = currentPage === 1;
+      prevButton.addEventListener("click", () => {
+        currentPage--;
+        renderJobs(searchBar.value);
+      });
+
+      const nextButton = document.createElement("button");
+      nextButton.textContent = "Next";
+      nextButton.disabled = currentPage === totalPages;
+      nextButton.addEventListener("click", () => {
+        currentPage++;
+        renderJobs(searchBar.value);
+      });
+
+      paginationContainer.appendChild(prevButton);
+      paginationContainer.appendChild(nextButton);
+    }
   }
 
   // Open modal when "Create New Job" button is clicked

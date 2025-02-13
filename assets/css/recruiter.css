@@ -36,7 +36,7 @@ button:hover {
 #searchBar {
   width: 80%;
   padding: 1rem;
-  margin: 1.5rem;
+  margin: 1.5rem 3rem;
   border: 1px solid #ccc;
   border-radius: 5px;
   box-sizing: border-box;
@@ -44,7 +44,6 @@ button:hover {
 
 #jobList{
   display: flex;
-
   flex-wrap: wrap;
   justify-content: space-evenly;
 }
@@ -123,6 +122,12 @@ button:hover {
   height: 100%;
   overflow: auto;
   background-color: rgba(0, 0, 0, 0.8);
+}
+
+#pagination{
+  margin: 0 1.5rem 1.5rem 1.5rem;
+  display: flex;
+  justify-content: space-between;
 }
 
 /* Modal content */

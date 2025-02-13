@@ -6,7 +6,7 @@
     "category": "ReactJS",
     "department": "Software Development",
     "level": "Mid-Level",
-    "location": "Remote",
+    "location": "Ahmedabad, India",
     "description": "We are looking for a skilled ReactJS developer to build modern web applications.",
     "postedDate": "2025-02-10",
     "applied": false
@@ -14,11 +14,11 @@
   {
     "id": 2,
     "title": "Backend Engineer",
-    "company": "Innovatech Solutions",
+    "company": "TCS",
     "category": "Node.js",
     "department": "Software Development",
     "level": "Senior",
-    "location": "New York, USA",
+    "location": "Chennai, India",
     "description": "Looking for an experienced Node.js developer to design and maintain backend services.",
     "postedDate": "2025-02-08",
     "applied": false
@@ -54,8 +54,68 @@
     "category": "Human Resources",
     "department": "HR",
     "level": "Senior",
-    "location": "Chicago, USA",
+    "location": "Tokyo, Japan",
     "description": "We need an experienced HR professional to manage recruitment and employee engagement.",
+    "postedDate": "2025-02-05",
+    "applied": false
+  },
+  {
+    "id": 6,
+    "title": "Product Manager",
+    "company": "Google",
+    "category": "Product Management",
+    "department": "Management",
+    "level": "Mid-Level",
+    "location": "Mumbai, India",
+    "description": "We are hiring a Product Manager to oversee the development and launch of innovative products.",
+    "postedDate": "2025-02-02",
+    "applied": false
+  },
+  {
+    "id": 7,
+    "title": "Backend Developer",
+    "company": "Code Solutions",
+    "category": "Node.js",
+    "department": "Software Development",
+    "level": "Senior-Level",
+    "location": "Delhi, India",
+    "description": "We are hiring a Product Manager to oversee the development and launch of innovative products.",
+    "postedDate": "2025-02-02",
+    "applied": false
+  },
+  {
+    "id": 8,
+    "title": "UI/UX Designer",
+    "company": "Designify",
+    "category": "UI/UX",
+    "department": "Design",
+    "level": "Junior-Level",
+    "location": "Kitchner, Canada",
+    "description": "Looking for a creative UI/UX Designer to create engaging user interfaces and experiences.",
+    "postedDate": "2025-02-07",
+    "applied": false
+  },
+  {
+    "id": 9,
+    "title": "DevOps Engineer",
+    "company": "CloudNet",
+    "category": "DevOps",
+    "department": "Infrastructure",
+    "level": "Senior-Level",
+    "location": "Berlin, Germany",
+    "description": "Seeking a DevOps Engineer with experience in cloud infrastructure and CI/CD pipelines.",
+    "postedDate": "2025-02-04",
+    "applied": false
+  },
+  {
+    "id": 10,
+    "title": "Data Scientist",
+    "company": "IBM",
+    "category": "Data Science",
+    "department": "Analytics",
+    "level": "Mid-Level",
+    "location": "Gandhinagar, India",
+    "description": "We need a Data Scientist to analyze large datasets and help drive business decisions.",
     "postedDate": "2025-02-05",
     "applied": false
   }
